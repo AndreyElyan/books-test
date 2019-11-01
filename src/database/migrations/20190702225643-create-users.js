@@ -22,7 +22,7 @@ module.exports = {
         allowNull: false,
       },
       telphone: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.STRING,
         allowNull: false,
       },
       password_hash: {

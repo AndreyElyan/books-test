@@ -9,6 +9,8 @@ export default class User extends Model {
         email: Sequelize.STRING,
         password: Sequelize.VIRTUAL,
         password_hash: Sequelize.STRING,
+        age: Sequelize.NUMBER,
+        telphone: Sequelize.STRING,
       },
       {
         sequelize,

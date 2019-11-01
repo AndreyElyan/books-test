@@ -15,8 +15,11 @@ class UserController {
         password: Yup.string()
           .required()
           .min(6),
-        age: Yup.number().required(),
-        telphone: Yup.number().required,
+        age: Yup.number()
+          .required()
+          .positive()
+          .integer(),
+        telphone: Yup.string().required,
       });
 
       if (!(await schema.isValid(req.body))) {
@@ -32,6 +35,7 @@ class UserController {
       const { id, name, email } = await User.create(req.body);
       return res.json({ id, name, email });
     } catch (err) {
+      console.log(err);
       return res.status(500).json({ message: 'Erro Internal' });
     }
   }
