@@ -1,10 +1,10 @@
 import Sequelize, { Model } from 'sequelize';
 
-export default class Disk extends Model {
+export default class Product extends Model {
   static init(sequelize) {
     super.init(
       {
-        rent: Sequelize.STRING,
+        favorite: Sequelize.STRING,
       },
       {
         sequelize,

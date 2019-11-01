@@ -5,9 +5,9 @@ export default class Book extends Model {
     super.init(
       {
         title: Sequelize.STRING,
-        ISBN: Sequelize.NUMBER,
+        isbn: Sequelize.STRING,
         category: Sequelize.STRING,
-        year: Sequelize.NUMBER,
+        year: Sequelize.STRING,
       },
       {
         sequelize,
@@ -17,6 +17,6 @@ export default class Book extends Model {
   }
 
   static associate(models) {
-    this.hasMany(models.Disk, { foreignKey: 'book_id' });
+    this.hasMany(models.Product, { foreignKey: 'book_id' });
   }
 }
