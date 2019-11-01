@@ -25,11 +25,11 @@
     "sequelize-cli": "^5.5.0",
     "sucrase": "^3.10.1"
   },
-  "name": "rent-store",
+  "name": "biblio-store",
   "version": "1.0.0",
   "main": ".eslintrc.js",
   "keywords": [],
   "author": "Andrey Elyan",
-  "description": "Sistema backend locadora",
+  "description": "Sistema backend biblioteca",
   "license": "ISC"
 }
