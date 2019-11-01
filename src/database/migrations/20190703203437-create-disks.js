@@ -8,7 +8,7 @@ module.exports = {
         autoIncrement: true,
         primaryKey: true,
       },
-      movie_id: {
+      book_id: {
         type: Sequelize.INTEGER,
         references: { model: 'books', key: 'id' },
         onUpdate: 'CASCADE',

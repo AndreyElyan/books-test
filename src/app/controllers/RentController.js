@@ -33,7 +33,7 @@ class RentController {
       const rent = await Rent.findOne({ where: { id } });
 
       await rent.update({ returned_at: Date.now() });
-      return res.json({ Response: 'Movie returned' });
+      return res.json({ Response: 'Book returned' });
     } catch (err) {
       return res.status(500).json({ message: 'Erro Internal' });
     }

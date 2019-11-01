@@ -14,6 +14,6 @@ export default class Disk extends Model {
   }
 
   static associate(models) {
-    this.belongsTo(models.Movie, { foreignKey: 'movie_id' });
+    this.belongsTo(models.Book, { foreignKey: 'book_id' });
   }
 }
