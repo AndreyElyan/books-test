@@ -1,7 +1,7 @@
-// tabela de disks
+// tabela de books
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('disks', {
+    return queryInterface.createTable('products', {
       id: {
         type: Sequelize.INTEGER,
         allowNull: false,
@@ -15,7 +15,7 @@ module.exports = {
         onDelete: 'CASCADE',
         allowNull: false,
       },
-      rent: {
+      favorite: {
         type: Sequelize.BOOLEAN,
         allowNull: false,
         default: false,
@@ -32,6 +32,6 @@ module.exports = {
   },
 
   down: queryInterface => {
-    return queryInterface.dropTable('disks');
+    return queryInterface.dropTable('products');
   },
 };

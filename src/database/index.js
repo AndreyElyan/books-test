@@ -3,10 +3,10 @@ import databaseConfig from '../config/database';
 
 import User from '../app/models/User';
 import Book from '../app/models/Book';
-import Disk from '../app/models/Disk';
-import Rent from '../app/models/Rent';
+import Product from '../app/models/Product';
+import Favorite from '../app/models/Favorite';
 
-const models = [User, Book, Rent, Disk];
+const models = [User, Book, Favorite, Product];
 
 class Database {
   constructor() {

@@ -1,18 +1,18 @@
-// tabela de rents
+// tabela de favorites
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('rents', {
+    return queryInterface.createTable('favorites', {
       id: {
         type: Sequelize.INTEGER,
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
       },
-      rented_at: {
+      favorited_at: {
         type: Sequelize.DATE,
         allowNull: false,
       },
-      returned_at: {
+      desfavorited_at: {
         type: Sequelize.DATE,
         allowNull: true,
       },
@@ -25,7 +25,7 @@ module.exports = {
       },
       book_id: {
         type: Sequelize.INTEGER,
-        references: { model: 'disks', key: 'id' },
+        references: { model: 'products', key: 'id' },
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
         allowNull: false,
@@ -42,6 +42,6 @@ module.exports = {
   },
 
   down: queryInterface => {
-    return queryInterface.dropTable('rents');
+    return queryInterface.dropTable('favorites');
   },
 };

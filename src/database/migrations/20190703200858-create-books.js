@@ -8,8 +8,12 @@ module.exports = {
         autoIncrement: true,
         primaryKey: true,
       },
-      ISBN: {
-        type: Sequelize.INTEGER,
+      title: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      isbn: {
+        type: Sequelize.STRING,
         allowNull: false,
       },
       category: {
@@ -17,7 +21,7 @@ module.exports = {
         allowNull: false,
       },
       year: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.STRING,
         allowNull: false,
       },
       created_at: {
