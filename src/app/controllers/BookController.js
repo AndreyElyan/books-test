@@ -1,7 +1,7 @@
 import * as Yup from 'yup';
 import Book from '../models/Book';
 
-const attributes = ['id', 'title', 'ISBN', 'category', 'year'];
+const attributes = ['id', 'title', 'isbn', 'category', 'year'];
 const limit = 20;
 
 class BookController {
@@ -9,9 +9,9 @@ class BookController {
     try {
       const schema = Yup.object({
         title: Yup.string().required(),
-        ISBN: Yup.number().required(),
+        isbn: Yup.string().required(),
         category: Yup.string().required(),
-        year: Yup.number().required,
+        year: Yup.string().required(),
       });
 
       if (!(await schema.isValid(req.body))) {
@@ -19,7 +19,7 @@ class BookController {
       }
 
       const bookExists = await Book.findOne({
-        where: { ISBN: req.body.ISBN },
+        where: { isbn: req.body.isbn },
       });
       if (bookExists) {
         return res.status(400).json({ error: 'Book already exists' });
@@ -35,27 +35,32 @@ class BookController {
     try {
       const schema = Yup.object({
         title: Yup.string().required(),
-        ISBN: Yup.number().required(),
+        isbn: Yup.string().required(),
       });
 
       if (!(await schema.isValid(req.body))) {
         return res.status(400).json({ error: 'Validation fails' });
       }
 
-      const { ISBN } = req.body;
+      const { title } = req.body;
 
-      if (ISBN) {
+      if (title) {
         const bookExists = await Book.findOne({
-          where: { ISBN: req.body.ISBN },
+          where: { title: req.body.title },
         });
         if (bookExists) {
-          return res.status(400).json({ response: 'book already exists' });
+          return res.status(400).json({ response: 'Book already exists' });
         }
       }
 
-      const { id, title } = await Book.update(req.body);
+      const { isbn } = req.body;
 
-      return res.json({ id, title });
+      const { id, title: name } = await Book.update(
+        { where: { isbn } },
+        req.body
+      );
+
+      return res.json({ id, name });
     } catch (err) {
       return res.status(500).json({ message: 'Erro Internal' });
     }
@@ -65,14 +70,16 @@ class BookController {
     try {
       const schema = Yup.object({
         title: Yup.string().required(),
-        ISBN: Yup.number().required(),
+        isbn: Yup.string().required(),
       });
 
       if (!(await schema.isValid(req.body))) {
         return res.status(400).json({ error: 'Validation fails' });
       }
 
-      const { id, title } = await Book.destroy(req.body);
+      const { isbn } = req.body;
+
+      const { id, title } = await Book.destroy({ where: { isbn } }, req.body);
 
       return res.json({ id, title });
     } catch (err) {

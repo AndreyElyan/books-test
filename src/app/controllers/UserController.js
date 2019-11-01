@@ -1,8 +1,8 @@
 import * as Yup from 'yup';
 import User from '../models/User';
 
-// const attributes = ['id', 'email', 'name'];
-// const limit = 20;
+const attributes = ['id', 'email', 'name', 'telphone'];
+const limit = 20;
 
 class UserController {
   async store(req, res) {
@@ -15,11 +15,8 @@ class UserController {
         password: Yup.string()
           .required()
           .min(6),
-        age: Yup.number()
-          .required()
-          .positive()
-          .integer(),
-        telphone: Yup.string().required,
+        age: Yup.number().required(),
+        telphone: Yup.string().required(),
       });
 
       if (!(await schema.isValid(req.body))) {
@@ -35,7 +32,6 @@ class UserController {
       const { id, name, email } = await User.create(req.body);
       return res.json({ id, name, email });
     } catch (err) {
-      console.log(err);
       return res.status(500).json({ message: 'Erro Internal' });
     }
   }
@@ -88,7 +84,7 @@ class UserController {
         return res.status(401).json({ error: 'Password does not match' });
       }
 
-      const { id, name } = await user.update(req.body);
+      const { id, name } = await User.update(req.body);
 
       return res.json({ id, name });
     } catch (err) {
@@ -96,34 +92,64 @@ class UserController {
     }
   }
 
-  // async index(req, res) {
-  //   const { page = 1 } = req.query;
+  async index(req, res) {
+    const { page = 1 } = req.query;
 
-  //   try {
-  //     const users = await User.findAll({
-  //       attributes,
-  //       limit,
-  //       offset: (page - 1) * limit,
-  //     });
+    try {
+      const users = await User.findAll({
+        attributes,
+        limit,
+        offset: (page - 1) * limit,
+      });
 
-  //     return res.json(users);
-  //   } catch (err) {
-  //     return res.status(500).json({ message: 'Erro Internal' });
-  //   }
-  // }
+      return res.json(users);
+    } catch (err) {
+      return res.status(500).json({ message: 'Erro Internal' });
+    }
+  }
 
-  // async show(req, res) {
-  //   try {
-  //     const book = await User.findOne({
-  //       where: { email: req.query.email },
-  //       attributes,
-  //     });
+  async show(req, res) {
+    try {
+      const users = await User.findOne({
+        where: { email: req.query.email },
+        attributes,
+      });
 
-  //     return res.json(book);
-  //   } catch (err) {
-  //     return res.status(500).json({ message: 'Erro Internal' });
-  //   }
-  // }
+      return res.json(users);
+    } catch (err) {
+      return res.status(500).json({ message: 'Erro Internal' });
+    }
+  }
+
+  async delete(req, res) {
+    try {
+      const schema = Yup.object().shape({
+        email: Yup.string().email(),
+        password: Yup.string().min(6),
+      });
+
+      if (!(await schema.isValid(req.body))) {
+        return res.status(400).json({ error: 'Validation fails' });
+      }
+      const { email, password } = req.body;
+
+      const user = await User.findOne({ where: { email } });
+
+      if (!user) {
+        return res.status(401).json({ error: 'User not found' });
+      }
+
+      if (!(await user.checkPassword(password))) {
+        return res.status(401).json({ error: 'Password does not match' });
+      }
+
+      const { id, name } = await User.destroy({ where: { email } }, req.body);
+
+      return res.json({ id, name, message: 'Succesfully deleted' });
+    } catch (err) {
+      return res.status(500).json({ message: 'Erro Internal' });
+    }
+  }
 }
 
 export default new UserController();
