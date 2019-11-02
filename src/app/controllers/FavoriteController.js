@@ -4,7 +4,7 @@ import Favorite from '../models/Favorite';
 class FavoriteController {
   async store(req, res) {
     const schema = Yup.object({
-      book_id: Yup.string().required(),
+      book_id: Yup.number().required(),
     });
 
     if (!(await schema.isValid(req.body))) {
@@ -22,7 +22,6 @@ class FavoriteController {
       });
       return res.json(favorite);
     } catch (err) {
-      console.log(err);
       return res.status(500).json({ message: 'Erro Internal' });
     }
   }
