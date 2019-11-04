@@ -9,7 +9,7 @@ import BookController from './app/controllers/BookController';
 const routes = new Router();
 
 routes.post('/users', UserController.store);
-routes.put('/users/', authMiddleware, UserController.update);
+routes.put('/users', authMiddleware, UserController.update);
 routes.get('/users', authMiddleware, UserController.index);
 routes.get('/users/find/:id', authMiddleware, UserController.show);
 routes.delete('/users', authMiddleware, UserController.delete);
