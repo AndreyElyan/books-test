@@ -1,18 +1,6 @@
-﻿﻿# Rent Store with Node JS
+﻿﻿# Biblio Store with Node JS
 
-O repositório apresenta o sistema de locação de filmes:
-
-
-## SQL
-
-A tabela de usuários foi criada com intuito de gravar > nome, email e senha. 
-
-A tabela de filmes foi criada para gravar discos, para que possa obter várias cópias do mesmo título
-
-A tabela de aluguéis, irá gravar a chave de identificação do filme alugado.
-➢ Gravará sua data
-
-
+O repositório apresenta o sistema de biblioteca online
 
 ## Instalação banco de dados (opcional)
 
@@ -20,8 +8,8 @@ A tabela de aluguéis, irá gravar a chave de identificação do filme alugado.
   a porta 5432 esteja liberada e que o comando "docker run --name postgresDB -p 5432:5432 -d -t kartoza/postgis"
   seja rodado e finalizado corretamente. (opcional)
 
-Os dados da API foram trabalhados encima do Sequelize. 
-Portanto, é necessário informar os dados do banco no arquivo de configuração em  /Config/database.js.
+Os dados da API foram trabalhados encima do Sequelize.
+Portanto, é necessário informar os dados do banco no arquivo de configuração em /Config/database.js.
 
 ```
 ## Para rodar o backend
@@ -36,6 +24,4 @@ Também é possível criar a base de dados manualmente através de um script de 
 
 Especificação Técnica de utilização e desenvolvimento em :
 
-https://github.com/AndreyElyan/rental-store/blob/master/Especifica%C3%A7%C3%A3o%20T%C3%A9cnica%20-%20Rent-Store.pdf
-
-
+https://github.com/AndreyElyan/books-test/blob/master/Especifica%C3%A7%C3%A3o%20T%C3%A9cnica%20-%20Books%20Store%20Ok.pdf
