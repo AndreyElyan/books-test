@@ -35,7 +35,6 @@ class BookController {
     try {
       const schema = Yup.object({
         title: Yup.string().required(),
-        isbn: Yup.string().required(),
       });
 
       if (!(await schema.isValid(req.body))) {
@@ -53,14 +52,13 @@ class BookController {
         }
       }
 
-      const { isbn } = req.body;
+      const { id } = req.params;
 
-      const { id, title: name } = await Book.update(
-        { where: { isbn } },
-        req.body
-      );
+      const book = await Book.findOne({ where: { id } });
 
-      return res.json({ id, name });
+      await book.update({ title: req.body.title });
+
+      return res.json({ id, title });
     } catch (err) {
       return res.status(500).json({ message: 'Erro Internal' });
     }
@@ -105,8 +103,10 @@ class BookController {
 
   async show(req, res) {
     try {
+      const { id } = req.params;
+
       const book = await Book.findOne({
-        where: { title: req.query.title },
+        where: { id },
         attributes,
       });
 

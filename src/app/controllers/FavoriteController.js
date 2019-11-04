@@ -1,6 +1,10 @@
 import * as Yup from 'yup';
 import Favorite from '../models/Favorite';
 
+const limit = 20;
+
+const attributes = ['id', 'favorited_at', 'book_id'];
+
 class FavoriteController {
   async store(req, res) {
     const schema = Yup.object({
@@ -18,7 +22,7 @@ class FavoriteController {
         user_id: req.userId,
         book_id,
         favorited_at: Date.now(),
-        canceled_at: null,
+        returned_at: null,
       });
       return res.json(favorite);
     } catch (err) {
@@ -34,6 +38,21 @@ class FavoriteController {
 
       await favorite.update({ returned_at: Date.now() });
       return res.json({ Response: 'Book returned' });
+    } catch (err) {
+      return res.status(500).json({ message: 'Erro Internal' });
+    }
+  }
+
+  async index(req, res) {
+    const { page = 1 } = req.query;
+
+    try {
+      const favorites = await Favorite.findAll({
+        attributes,
+        offset: (page - 1) * limit,
+      });
+
+      return res.json(favorites);
     } catch (err) {
       return res.status(500).json({ message: 'Erro Internal' });
     }

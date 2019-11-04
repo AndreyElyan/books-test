@@ -12,7 +12,7 @@ module.exports = {
         type: Sequelize.DATE,
         allowNull: false,
       },
-      desfavorited_at: {
+      returned_at: {
         type: Sequelize.DATE,
         allowNull: true,
       },
@@ -25,7 +25,7 @@ module.exports = {
       },
       book_id: {
         type: Sequelize.INTEGER,
-        references: { model: 'products', key: 'id' },
+        references: { model: 'books', key: 'id' },
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
         allowNull: false,

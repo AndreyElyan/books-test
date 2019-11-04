@@ -6,7 +6,6 @@ export default class Favorite extends Model {
       {
         favorited_at: Sequelize.DATE,
         returned_at: Sequelize.DATE,
-        desfavorited_at: Sequelize.DATE,
       },
       {
         sequelize,

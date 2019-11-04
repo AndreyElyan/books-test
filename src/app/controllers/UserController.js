@@ -110,8 +110,10 @@ class UserController {
 
   async show(req, res) {
     try {
+      const { id } = req.params;
+
       const users = await User.findOne({
-        where: { email: req.query.email },
+        where: { id },
         attributes,
       });
 
