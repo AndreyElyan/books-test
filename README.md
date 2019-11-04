@@ -19,7 +19,7 @@ Portanto, é necessário informar os dados do banco no arquivo de configuração
 - Após a configuração do arquivo (/Config/database.js) na raiz do projeto (src), rodar o comando "npx sequelize db:migrate".
 
 - Na raiz (src) rodar o comando yarn dev ou npm run start.
-Também é possível criar a base de dados manualmente através de um script de criação de banco de dados. Nesta base de dados, também são realizados registros de filmes e discos. [O schema de banco de dados é disponibilizado(schema.sql).
+
 ```
 
 Especificação Técnica de utilização e desenvolvimento em :
